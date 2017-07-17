@@ -77,8 +77,8 @@ var server_data = [];
 function GetRequestHandlers(){
    var request_handlers = {};
    
-   request_handlers[ '/update' ] = Update;
-   request_handlers[ '/api' ] = OnAPI;
+   //request_handlers[ '/update' ] = Update;
+   //request_handlers[ '/api' ] = OnAPI;
    
    return request_handlers;
 }//GetRequestHandlers
