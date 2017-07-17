@@ -2,21 +2,25 @@
    "name"        : "reflector",
    "version"     : "0.0.1",
    "description" : "Gets and stores http requests",
-   "main"        : "index.js",
+   "main"        : "app.js",
    "scripts"     : {
-      "test": "echo \"Error: no test specified\" && exit 1"
+      "start": "node app.js"
    },
    "keywords"    : [
       "http",
       "request",
       "reflector"
    ],
+   "repository"  : {
+      "type": "git",
+      "url" : "https://github.com/FantomNexx/src-reflector"
+   },
    "author"      : "Fantom",
    "license"     : "ISC",
    "dependencies": {
-      "debug"  : "^2.6.3",
-      "fs"     : "0.0.1-security",
-      "http"   : "0.0.0",
-      "path"   : "^0.12.7"
+      "debug": "^2.6.3",
+      "fs"   : "0.0.1-security",
+      "http" : "0.0.0",
+      "path" : "^0.12.7"
    }
 }
