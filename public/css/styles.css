@@ -1,0 +1,21 @@
+*{
+    font-family : 'Source Code Pro', monospace !important;
+}
+
+/*--------------------------------------------------------*/
+body{
+    background-color : #ccc;
+    color            : #212121;
+}
+
+/*--------------------------------------------------------*/
+#id-log-container{
+    background-color   : #fafafa;
+    margin             : 16px 16px 16px 16px;
+    width              : 100%;
+    -webkit-box-shadow : 0 0 10px 0 rgba(0, 0, 0, 0.38);
+    -moz-box-shadow    : 0 0 10px 0 rgba(0, 0, 0, 0.38);
+    box-shadow         : 0 0 10px 0 rgba(0, 0, 0, 0.38);
+}
+
+/*--------------------------------------------------------*/
