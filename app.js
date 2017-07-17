@@ -247,7 +247,7 @@ function OnAPI( request, response ){
    var TellFact = function( app ){
       var fact = 'DEFAULT_FACT';
       
-      var fact_category = app.getArgument( 'fact-category' );
+      var fact_category = app.getArgument( 'facts-category' );
       if( fact_category === 'history' ){
          fact = 'fact_history';//getRandomHistoryFact();
       }else if( fact_category === 'other' ){
