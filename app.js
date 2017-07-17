@@ -108,6 +108,11 @@ function OnRequest( request, response ){
       return;
    }//if
    
+   if( request.url === '/api' ){
+      OnAPI( request, response );
+      return;
+   }//if
+   
    var RequestHandler = request_handlers[ request.url ];
    Request_GetData( request_params, RequestHandler );
 }//WebServer
@@ -265,10 +270,12 @@ function OnAPI( request, response ){
       
    };//TellFact
    
-   const action_map = new Map();
-   action_map.set( 'tell_fact', TellFact );
+   //const action_map = new Map();
+   //action_map.set( 'tell_fact', TellFact );
    
-   app.handleRequest( action_map );
+   //app.handleRequest( action_map );
+   
+   app.ask( 'Hey' );
    
 }//OnAPI
 //----------------------------------------------------------
