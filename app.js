@@ -17,8 +17,6 @@
       console.log( '\n' );
       console.log( '[app.js] OnAppEnded()' );
       console.log( '\n' );
-      
-      fdb.Kill();
    }//OnAppEnded
    //-------------------------------------------------------
 }//ENTRY
@@ -70,6 +68,7 @@
 }//constants
 //----------------------------------------------------------
 
+var server_data = [];
 
 //----------------------------------------------------------
 //init request handlers
@@ -77,8 +76,10 @@
 function GetRequestHandlers(){
    var request_handlers = {};
    
-   request_handlers[ '/test' ] = Test;
-	
+   request_handlers[ '/update' ] = Update;
+   request_handlers[ '/post' ] = Save;
+   request_handlers[ '/get' ] = Save;
+   
    return request_handlers;
 }//GetRequestHandlers
 //----------------------------------------------------------
@@ -159,7 +160,7 @@ function OnFileRead( error, data, type, response ){
 
 //----------------------------------------------------------
 function Respond_WrongRequest( request, response ){
-	
+   
    var status_code = STATUS_CODE.NOT_FOUND;
    var content_type = CONTENT_TYPES.TEXT;
    var response_msg = '404 Wrong request';
@@ -169,10 +170,7 @@ function Respond_WrongRequest( request, response ){
 }//Respond_WrongRequest
 //----------------------------------------------------------
 function Respond_Result( request_params ){
-	
-	request_params.response_data.request_url =
-		request_params.request_obj.url;
-	
+   
    var status_code = STATUS_CODE.OK;
    var content_type = CONTENT_TYPES.JSON;
    var response_msg = JSON.stringify( request_params.response_data );
@@ -207,8 +205,36 @@ function Request_GetData( request_params, callback ){
 
 
 //----------------------------------------------------------
-function Test( request_params ){
+function Update( request_params ){
+   
+   request_params.response_data = {
+      requests_arr: server_data
+   };
+   
+   request_params.callback_on_result( request_params );
+}//Test
+//----------------------------------------------------------
+function Save( request_params ){
+   
+   var saved_data = {
+      url         : request_params.request_obj.url,
+      request_data: request_params.request_data
+   };
+   
+   var date_str = '[' + new Date().toISOString().slice( 11, -5 ) + ']';
+   
+   var value = date_str + JSON.stringify(saved_data);
 
-
+   
+   if( server_data.length > 10 ){
+      server_data = [];
+   }//if
+   
+   server_data.push( value );
+   
+   request_params.response_data = value;
+   
+   request_params.callback_on_result( request_params );
+   
 }//Test
 //----------------------------------------------------------|
