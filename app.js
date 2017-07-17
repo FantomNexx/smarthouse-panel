@@ -247,9 +247,6 @@ function Save( request_params ){
 
 //----------------------------------------------------------
 function OnAPI( request, response ){
-   log( LOG_TAG, '[2]' );
-   log(JSON.stringify( request ));
-   log(JSON.stringify( response ));
    
    log( LOG_TAG, '[3]' );
    const app = new App( { request, response } );
