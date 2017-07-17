@@ -241,8 +241,7 @@ function Save( request_params ){
 
 //----------------------------------------------------------
 function OnAPI( request, response ){
-   var params = { request: request, response: response };
-   var app = new App( params );
+   const app = new App( { request, response } );
    
    var TellFact = function( app ){
       var fact = 'DEFAULT_FACT';
@@ -266,8 +265,8 @@ function OnAPI( request, response ){
       
    };//TellFact
    
-   var action_map = {};
-   action_map[ 'tell_fact' ] = TellFact;
+   const action_map = new Map();
+   action_map.set( 'tell_fact', TellFact );
    
    app.handleRequest( action_map );
    
