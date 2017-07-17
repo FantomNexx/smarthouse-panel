@@ -88,7 +88,8 @@ var request_handlers = GetRequestHandlers();
 
 //----------------------------------------------------------
 //start web server
-http.createServer( OnRequest ).listen( 3000 );
+var port = (process.env.PORT || 5000);
+http.createServer( OnRequest ).listen( port );
 //----------------------------------------------------------
 function OnRequest( request, response ){
    
