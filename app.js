@@ -77,8 +77,7 @@ function GetRequestHandlers(){
    var request_handlers = {};
    
    request_handlers[ '/update' ] = Update;
-   request_handlers[ '/post' ] = Save;
-   request_handlers[ '/get' ] = Save;
+   request_handlers[ '/api' ] = Save;
    
    return request_handlers;
 }//GetRequestHandlers
@@ -210,7 +209,6 @@ function Update( request_params ){
    request_params.response_data = {
       requests_arr: server_data
    };
-   
    request_params.callback_on_result( request_params );
 }//Test
 //----------------------------------------------------------
@@ -236,5 +234,5 @@ function Save( request_params ){
    
    request_params.callback_on_result( request_params );
    
-}//Test
+}//Save
 //----------------------------------------------------------|

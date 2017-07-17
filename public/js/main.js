@@ -26,11 +26,6 @@ function Init(){
 
 Init();
 
-
-function GetDateStr(){
-   return '[' + new Date().toISOString().slice( 11, -5 ) + ']';
-}//GetDateStr
-
 //----------------------------------------------------------
 function Update(){
    
