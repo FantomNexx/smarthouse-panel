@@ -89,8 +89,8 @@ var request_handlers = GetRequestHandlers();
 
 //----------------------------------------------------------
 //start web server
-var port = (process.env.PORT || 5000);
-http.createServer( OnRequest ).listen( port );
+//var port = (process.env.PORT || 5000);
+//http.createServer( OnRequest ).listen( port );
 //----------------------------------------------------------
 function OnRequest( request, response ){
    
@@ -244,9 +244,8 @@ function Save( request_params ){
 }//Save
 //----------------------------------------------------------
 
-
-//----------------------------------------------------------
-function OnAPI( request, response ){
+//function OnAPI( request, response ){
+exports.GActionWithApiAI = function( request, response ){
    
    log( LOG_TAG, '[3]' );
    const app = new App( { request, response } );
@@ -282,5 +281,5 @@ function OnAPI( request, response ){
    
    app.ask( 'Hey' );
    
-}//OnAPI
+};//OnAPI
 //----------------------------------------------------------
