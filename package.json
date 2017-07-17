@@ -18,9 +18,10 @@
    "author"      : "Fantom",
    "license"     : "ISC",
    "dependencies": {
-      "debug": "^2.6.3",
-      "fs"   : "0.0.1-security",
-      "http" : "0.0.0",
-      "path" : "^0.12.7"
+      "debug"            : "^2.6.3",
+      "fs"               : "0.0.1-security",
+      "http"             : "0.0.0",
+      "path"             : "^0.12.7",
+      "actions-on-google": "^1.0.3"
    }
 }

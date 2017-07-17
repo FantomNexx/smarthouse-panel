@@ -28,6 +28,7 @@
    var http = require( 'http' );
    var path = require( 'path' );
    var fs = require( 'fs' );
+   var App = require( 'actions-on-google' ).ApiAiApp;
    
    //log with a timestamp
    var log = require( './log.js' );
@@ -77,7 +78,7 @@ function GetRequestHandlers(){
    var request_handlers = {};
    
    request_handlers[ '/update' ] = Update;
-   request_handlers[ '/api' ] = Save;
+   request_handlers[ '/api' ] = OnAPI;
    
    return request_handlers;
 }//GetRequestHandlers
@@ -221,8 +222,8 @@ function Save( request_params ){
    
    var date_str = '[' + new Date().toISOString().slice( 11, -5 ) + ']';
    
-   var value = date_str + JSON.stringify(saved_data);
-
+   var value = date_str + JSON.stringify( saved_data );
+   
    
    if( server_data.length > 10 ){
       server_data = [];
@@ -235,4 +236,40 @@ function Save( request_params ){
    request_params.callback_on_result( request_params );
    
 }//Save
-//----------------------------------------------------------|
+//----------------------------------------------------------
+
+
+//----------------------------------------------------------
+function OnAPI( request, response ){
+   var params = { request: request, response: response };
+   var app = new App( params );
+   
+   var TellFact = function( app ){
+      var fact = 'DEFAULT_FACT';
+      
+      var fact_category = app.getArgument( 'fact-category' );
+      if( fact_category === 'history' ){
+         fact = 'fact_history';//getRandomHistoryFact();
+      }else if( fact_category === 'other' ){
+         fact = 'fact_other';//getRandomOtherFact();
+      }//else
+      
+      var is_screen_available = app.hasSurfaceCapability(
+         app.SurfaceCapabilities.SCREEN_OUTPUT
+      );
+      
+      if( is_screen_available ){
+         app.ask( '[screen available]:' + fact );
+      }else{
+         app.ask( '[screen NOT available]:' + fact );
+      }//else
+      
+   };//TellFact
+   
+   var action_map = {};
+   action_map[ 'tell_fact' ] = TellFact;
+   
+   app.handleRequest( action_map );
+   
+}//OnAPI
+//----------------------------------------------------------
