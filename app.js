@@ -109,12 +109,12 @@ function OnRequest( request, response ){
    }//if
    
    /*
-   if( request.url === '/api' ){
-      log( LOG_TAG, '[1]' );
-      OnAPI( request, response );
-      return;
-   }//if
-   */
+    if( request.url === '/api' ){
+    log( LOG_TAG, '[1]' );
+    OnAPI( request, response );
+    return;
+    }//if
+    */
    
    var RequestHandler = request_handlers[ request.url ];
    Request_GetData( request_params, RequestHandler );
@@ -135,14 +135,14 @@ function ProcessWebpageFiles( request, response ){
    
    file_path = path.join( './public', request.url );
    
-   for( var ftype in FILE_TYPE_REGEXP ){
-      if( !FILE_TYPE_REGEXP.hasOwnProperty( ftype ) ){
+   for( var type in FILE_TYPE_REGEXP ){
+      if( !FILE_TYPE_REGEXP.hasOwnProperty( type ) ){
          continue;
       }//if
       
-      if( request.url.match( FILE_TYPE_REGEXP[ ftype ] ) ){
+      if( request.url.match( FILE_TYPE_REGEXP[ type ] ) ){
          fs.readFile( file_path, file_encoding, function( error, data ){
-            OnFileRead( error, data, CONTENT_TYPES[ ftype ], response );
+            OnFileRead( error, data, CONTENT_TYPES[ type ], response );
          } );
          return;
       }//if match
@@ -237,51 +237,64 @@ function Save( request_params ){
    
    server_data.push( value );
    
-   request_params.response_data = value;
-   request_params.callback_on_result( request_params );
+   //request_params.response_data = value;
+   request_params.callback_on_result( GetJSON( request_params ) );
    
 }//Save
 //----------------------------------------------------------
 
+function GetJSON( request_params ){
+   
+   request_params.response_data =
+      {
+         'speech'     : 'speech msg',
+         'displayText': 'displayText msg',
+         'data'       : { 'face': { 'facebook_msg': 'the msg' } },
+         'contextOut' : [ { 'facts-category': 'History' } ],
+         'source'     : 'DuckDuckGo'
+      };
+   
+   return request_params;
+}//GetJSON
 
 //----------------------------------------------------------
 /*
-function OnAPI( request, response ){
-   log( LOG_TAG, '[3]' );
-   
-   var app = new ApiAiApp({request: request, response: response});
-   
-   log( LOG_TAG, '[4]' );
-   
-   var TellFact = function( app ){
-      var fact = 'DEFAULT_FACT';
-      
-      var fact_category = app.getArgument( 'facts-category' );
-      if( fact_category === 'history' ){
-         fact = 'fact_history';//getRandomHistoryFact();
-      }else if( fact_category === 'other' ){
-         fact = 'fact_other';//getRandomOtherFact();
-      }//else
-      
-      var is_screen_available = app.hasSurfaceCapability(
-         app.SurfaceCapabilities.SCREEN_OUTPUT
-      );
-      
-      if( is_screen_available ){
-         app.ask( '[screen available]:' + fact );
-      }else{
-         app.ask( '[screen NOT available]:' + fact );
-      }//else
-      
-   };//TellFact
-   
-   //const action_map = new Map();
-   //action_map.set( 'tell_fact', TellFact );
-   
-   //app.handleRequest( action_map );
-   
-   app.ask( 'Hey' );
-   
-}//OnAPI
-*/
+ function OnAPI( request, response ){
+ log( LOG_TAG, '[3]' );
+ 
+ var app = new ApiAiApp({request: request, response: response});
+ 
+ log( LOG_TAG, '[4]' );
+ 
+ var TellFact = function( app ){
+ var fact = 'DEFAULT_FACT';
+ 
+ var fact_category = app.getArgument( 'facts-category' );
+ if( fact_category === 'history' ){
+ fact = 'fact_history';//getRandomHistoryFact();
+ }else if( fact_category === 'other' ){
+ fact = 'fact_other';//getRandomOtherFact();
+ }//else
+ 
+ var is_screen_available = app.hasSurfaceCapability(
+ app.SurfaceCapabilities.SCREEN_OUTPUT
+ );
+ 
+ if( is_screen_available ){
+ app.ask( '[screen available]:' + fact );
+ }else{
+ app.ask( '[screen NOT available]:' + fact );
+ }//else
+ 
+ };//TellFact
+ 
+ //const action_map = new Map();
+ //action_map.set( 'tell_fact', TellFact );
+ 
+ //app.handleRequest( action_map );
+ 
+ app.ask( 'Hey' );
+ 
+ }//OnAPI
+ */
 //----------------------------------------------------------
