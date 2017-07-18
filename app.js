@@ -250,7 +250,7 @@ function GetJSON( request_params ){
          'speech'     : 'speech msg',
          'displayText': 'displayText msg',
          'data'       : { 'face': { 'facebook_msg': 'the msg' } },
-         'contextOut' : [ { 'facts-category': 'History' } ],
+         'contextOut' : [],
          'source'     : 'DuckDuckGo'
       };
    
