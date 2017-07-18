@@ -1,0 +1,90 @@
+html{
+    box-sizing : border-box;
+}
+
+*, *:before, *:after{
+    box-sizing : inherit;
+}
+
+body{
+    background-color : #192837;
+    font-family      : "Titillium Web", Arial, sans-serif;
+    font-size        : 20px;
+    margin           : 0;
+}
+
+.container{
+}
+
+input{
+    background-color : #126077;
+    border           : 1px solid #549eaf;
+    display          : block;
+    color            : #a6cae6;
+    font-family      : "Titillium Web";
+    font-size        : 20px;
+    line-height      : 43px;
+    padding          : 0 0.75em;
+    width            : 400px;
+    margin           : 16px 16px 0 16px;
+}
+
+input:focus{
+    outline : 0;
+}
+
+button:focus{
+    outline : 0;
+}
+
+textarea{
+    background-color : #070f24;
+    border           : 1px solid #122435;
+    color            : #606b88;
+    padding          : 0.5em;
+    width            : 100%;
+    margin           : 16px 16px 0 16px;
+}
+
+input:active,
+input:focus,
+textarea:active,
+textarea:focus{
+    outline : 1px solid #48788b;
+}
+
+.btn{
+    background-color : #126178;
+    border           : 1px solid #549eaf;
+    color            : #549eaf;
+    cursor           : pointer;
+    display          : block;
+    font-family      : "Titillium Web";
+    font-size        : 20px;
+    line-height      : 43px;
+    width            : 200px;
+    text-align       : center;
+    text-transform   : uppercase;
+    margin           : 16px 16px 0 16px;
+}
+
+.btn:hover{
+    background-color : #1888a9;
+    color            : #183035;
+}
+
+.spoken-response{
+    max-height : 0;
+    overflow   : hidden;
+    margin     : 16px 16px 0 16px;
+}
+
+.spoken-response.is-active{
+    max-height : 300px;
+}
+
+.spoken-response__text{
+    background-color : #040e23;
+    color            : #7584a2;
+    padding          : 1em;
+}

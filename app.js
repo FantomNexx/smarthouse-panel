@@ -47,11 +47,10 @@
    var LOG_TAG = '[app.js]:';
    
    var FILE_TYPE_REGEXP = {
-      CSS       : /.css$/,
-      JAVASCRIPT: /.js$/,
-      HTML      : /.html$/
+      CSS : /.css$/,
+      JS  : /.js$/,
+      HTML: /.html$/
    };//FILE_TYPE_REGEXP
-   
    
    var STATUS_CODE = {
       OK         : 200,
@@ -60,16 +59,17 @@
    };//STATUS_CODE
    
    var CONTENT_TYPES = {
-      HTML      : { 'Content-Type': 'text/html' },
-      CSS       : { 'Content-Type': 'text/css' },
-      JAVASCRIPT: { 'Content-Type': 'application/javascript' },
-      TEXT      : { 'Content-Type': 'text/plain' },
-      JSON      : { 'Content-Type': 'application/json' }
+      HTML: { 'Content-Type': 'text/html' },
+      CSS : { 'Content-Type': 'text/css' },
+      JS  : { 'Content-Type': 'application/javascript' },
+      TEXT: { 'Content-Type': 'text/plain' },
+      JSON: { 'Content-Type': 'application/json' }
    };//CONTENT_TYPES
 }//constants
 //----------------------------------------------------------
 
 var server_data = [];
+
 
 //----------------------------------------------------------
 //init request handlers
@@ -107,14 +107,6 @@ function OnRequest( request, response ){
       ProcessWebpageFiles( request, response );
       return;
    }//if
-   
-   /*
-    if( request.url === '/api' ){
-    log( LOG_TAG, '[1]' );
-    OnAPI( request, response );
-    return;
-    }//if
-    */
    
    var RequestHandler = request_handlers[ request.url ];
    Request_GetData( request_params, RequestHandler );
@@ -257,44 +249,4 @@ function GetJSON( request_params ){
    return request_params;
 }//GetJSON
 
-//----------------------------------------------------------
-/*
- function OnAPI( request, response ){
- log( LOG_TAG, '[3]' );
- 
- var app = new ApiAiApp({request: request, response: response});
- 
- log( LOG_TAG, '[4]' );
- 
- var TellFact = function( app ){
- var fact = 'DEFAULT_FACT';
- 
- var fact_category = app.getArgument( 'facts-category' );
- if( fact_category === 'history' ){
- fact = 'fact_history';//getRandomHistoryFact();
- }else if( fact_category === 'other' ){
- fact = 'fact_other';//getRandomOtherFact();
- }//else
- 
- var is_screen_available = app.hasSurfaceCapability(
- app.SurfaceCapabilities.SCREEN_OUTPUT
- );
- 
- if( is_screen_available ){
- app.ask( '[screen available]:' + fact );
- }else{
- app.ask( '[screen NOT available]:' + fact );
- }//else
- 
- };//TellFact
- 
- //const action_map = new Map();
- //action_map.set( 'tell_fact', TellFact );
- 
- //app.handleRequest( action_map );
- 
- app.ask( 'Hey' );
- 
- }//OnAPI
- */
 //----------------------------------------------------------
