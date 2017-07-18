@@ -28,13 +28,13 @@
    var http = require( 'http' );
    var path = require( 'path' );
    var fs = require( 'fs' );
-   var ApiAiApp = require('actions-on-google').ApiAiApp;
+   //var ApiAiApp = require('actions-on-google').ApiAiApp;
    
    //log with a timestamp
    var log = require( './log.js' );
    
    //log with a timestamp
-   var IsEmpty = require( './is-empty.js' );
+   //var IsEmpty = require( './is-empty.js' );
 }//EXTERNALS
 
 
@@ -78,7 +78,7 @@ function GetRequestHandlers(){
    var request_handlers = {};
    
    request_handlers[ '/update' ] = Update;
-   request_handlers[ '/api' ] = OnAPI;
+   request_handlers[ '/api' ] = Save;
    
    return request_handlers;
 }//GetRequestHandlers
@@ -108,11 +108,13 @@ function OnRequest( request, response ){
       return;
    }//if
    
+   /*
    if( request.url === '/api' ){
       log( LOG_TAG, '[1]' );
       OnAPI( request, response );
       return;
    }//if
+   */
    
    var RequestHandler = request_handlers[ request.url ];
    Request_GetData( request_params, RequestHandler );
@@ -246,6 +248,7 @@ function Save( request_params ){
 
 
 //----------------------------------------------------------
+/*
 function OnAPI( request, response ){
    log( LOG_TAG, '[3]' );
    
@@ -283,4 +286,5 @@ function OnAPI( request, response ){
    app.ask( 'Hey' );
    
 }//OnAPI
+*/
 //----------------------------------------------------------
