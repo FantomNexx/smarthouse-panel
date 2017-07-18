@@ -228,7 +228,6 @@ function Save( request_params ){
    };
    
    var date_str = '[' + new Date().toISOString().slice( 11, -5 ) + ']';
-   
    var value = date_str + JSON.stringify( saved_data );
    
    
@@ -239,51 +238,7 @@ function Save( request_params ){
    server_data.push( value );
    
    request_params.response_data = value;
-   
    request_params.callback_on_result( request_params );
    
 }//Save
-//----------------------------------------------------------
-
-
-//----------------------------------------------------------
-/*
-function OnAPI( request, response ){
-   log( LOG_TAG, '[3]' );
-   
-   var app = new ApiAiApp({request: request, response: response});
-   
-   log( LOG_TAG, '[4]' );
-   
-   var TellFact = function( app ){
-      var fact = 'DEFAULT_FACT';
-      
-      var fact_category = app.getArgument( 'facts-category' );
-      if( fact_category === 'history' ){
-         fact = 'fact_history';//getRandomHistoryFact();
-      }else if( fact_category === 'other' ){
-         fact = 'fact_other';//getRandomOtherFact();
-      }//else
-      
-      var is_screen_available = app.hasSurfaceCapability(
-         app.SurfaceCapabilities.SCREEN_OUTPUT
-      );
-      
-      if( is_screen_available ){
-         app.ask( '[screen available]:' + fact );
-      }else{
-         app.ask( '[screen NOT available]:' + fact );
-      }//else
-      
-   };//TellFact
-   
-   //const action_map = new Map();
-   //action_map.set( 'tell_fact', TellFact );
-   
-   //app.handleRequest( action_map );
-   
-   app.ask( 'Hey' );
-   
-}//OnAPI
-*/
 //----------------------------------------------------------
