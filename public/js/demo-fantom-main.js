@@ -264,7 +264,12 @@ function ToggleCooling(){
    }//if
 }//ToggleCooling
 //----------------------------------------------------------
-function EnableCooling(){
+function EnableCooling( new_value ){
+   
+   if( new_value != undefined ){
+      current_states.cooling.value = new_value;
+   }//if
+   
    current_states.cooling.state = CONTROL_STATES.ON;
    el_block_cooling_state.innerText = CONTROL_STATES.ON;
    el_block_cooling_value.innerHTML =
@@ -288,7 +293,13 @@ function ToggleHeating(){
    }//if
 }//ToggleHeating
 //----------------------------------------------------------
-function EnableHeating(){
+function EnableHeating( new_value ){
+   
+   if( new_value != undefined ){
+      current_states.heating.value = new_value;
+   }//if
+   
+   
    current_states.heating.state = CONTROL_STATES.ON;
    el_block_heating_state.innerText = CONTROL_STATES.ON;
    el_block_heating_value.innerHTML =
@@ -327,26 +338,17 @@ function ProcessResponse( response ){
    var msg = ' [Server response]: ';
    msg += response.result.fulfillment.speech;
    
-   /*
-    if( response.result.speech ){
-    msg += response.result.speech;
-    SendToLog( msg );
-    }else{
-    msg += response.result.fulfillment.speech;
-    }//else
-    */
-   
    SendToLog( msg );
    
    SetStatus( response.result.fulfillment.speech );
    setTimeout( function(){
       SetStatus( status_lines.standing_by );
-   }, 3000 );
+   }, 5000 );
    
    
    var data = response.result.fulfillment.data;
    
-   if(data === undefined){
+   if( data === undefined ){
       return;
    }//if
    
@@ -354,9 +356,54 @@ function ProcessResponse( response ){
       case 'lights_actions':
          ProcessActionLights( data );
          break;
+      case 'general_action':
+         ProcessActionGeneral( data );
+         break;
    }//switch
    
 }//ProcessResponse
+//----------------------------------------------------------
+function ProcessActionGeneral( data ){
+   
+   if( data.action_name === 'Light' ){
+      
+      if( data.new_state === 'disable' ){
+         DisableLights();
+         return;
+      }//if
+      
+   }else if( data.action_name === 'Heating' ){
+      
+      if( data.new_state === 'disable' ){
+         DisableHeating();
+         return;
+      }//if
+      
+      if( data.new_state === 'enable' && data.new_value === undefined ){
+         EnableHeating();
+         return;
+      }//if
+      
+      EnableHeating( data.new_value );
+      
+   }else if( data.action_name === 'Cooling' ){
+      
+      if( data.new_state === 'disable' ){
+         DisableCooling();
+         return;
+      }//if
+      
+      if( data.new_state === 'enable' && data.new_value === undefined ){
+         EnableCooling();
+         return;
+      }//if
+      
+      EnableCooling( data.new_value );
+   }//else
+   
+   
+   
+}//ProcessActionGeneral
 //----------------------------------------------------------
 function ProcessActionLights( data ){
    if( data.new_state === 'disable' ){

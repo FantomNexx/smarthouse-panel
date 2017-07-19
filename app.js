@@ -60,6 +60,7 @@
    };//STATUS_CODE
    
    var CONTENT_TYPES = {
+      PNG : { 'Content-Type': 'image/png' },
       HTML: { 'Content-Type': 'text/html' },
       CSS : { 'Content-Type': 'text/css' },
       JS  : { 'Content-Type': 'application/javascript' },
@@ -261,6 +262,9 @@ function GetResponse( request_params ){
    };//response
    
    switch( request.action ){
+      case 'general_action':
+         response = ProcessActionGeneral( request, response );
+         break;
       case 'lights_actions':
          response = ProcessActionLights( request, response );
          break;
@@ -271,13 +275,55 @@ function GetResponse( request_params ){
    return request_params;
 }//GetJSON
 //----------------------------------------------------------
+function ProcessActionGeneral( request, response ){
+   
+   var data = {};
+   data.action_name = undefined;
+   data.new_state = undefined;
+   data.new_value = undefined;
+   
+   if( request.parameters['Cooling'] !== ''){
+      data.action_name = 'Cooling';
+   }else if( request.parameters['Heating'] !== ''){
+      data.action_name = 'Heating';
+   }else if( request.parameters['Light'] !== ''){
+      data.action_name = 'Light';
+   }//else
+   
+   if( request.parameters['enable'] !== ''){
+      data.new_state = 'enable';
+   }else if( request.parameters['disable'] !== ''){
+      data.new_state = 'disable';
+   }//else
+   
+   if( request.parameters['number'] !== ''){
+      data.new_value = request.parameters['number'];
+   }//if
+   
+   
+   if(data.new_state === '' || data.new_state === undefined){
+      if(data.new_value !== undefined){
+         data.new_state = 'enable';
+      }//if
+   }//if
+   
+   
+   var msg = 'Ok, I will do what you asked for';
+   
+   response.speech = msg;
+   response.displayText = msg;
+   response.data = data;
+   
+   return response;
+}//ProcessActionLights
+//----------------------------------------------------------
 function ProcessActionLights( request, response ){
    
    var data = {};
    data.action_name = request.action;
    data.new_state = undefined;
    
-   var msg ='';
+   var msg = '';
    
    if( request.parameters.disable === 'disable' ){
       data.new_state = 'disable';
