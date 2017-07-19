@@ -352,15 +352,18 @@ function ProcessResponse( response ){
       return;
    }//if
    
-   switch( data.action_name ){
-      case 'lights_actions':
-         ProcessActionLights( data );
-         break;
-      case 'general_action':
-         ProcessActionGeneral( data );
-         break;
-   }//switch
+   ProcessActionGeneral( data );
    
+   /*
+    switch( data.action_name ){
+    case 'lights_actions':
+    ProcessActionLights( data );
+    break;
+    case 'general_action':
+    ProcessActionGeneral( data );
+    break;
+    }//switch
+    */
 }//ProcessResponse
 //----------------------------------------------------------
 function ProcessActionGeneral( data ){
@@ -480,36 +483,39 @@ function GetDate(){
 //----------------------------------------------------------
 
 var a = {
-   'id'       : '55fea1a0-3f1c-4e64-9e60-6f5801beef6d',
-   'timestamp': '2017-07-19T14:15:29.898Z',
+   'id'       : 'd4abb60a-6e11-466c-9379-5eaec951c005',
+   'timestamp': '2017-07-19T15:47:47.781Z',
    'lang'     : 'en',
    'result'   : {
       'source'          : 'agent',
-      'resolvedQuery'   : 'enable lights',
+      'resolvedQuery'   : 'turn on cooling 15',
       'speech'          : '',
-      'action'          : 'lights_actions',
+      'action'          : 'general_action',
       'actionIncomplete': false,
       'parameters'      : {
+         'number' : '15',
+         'Cooling': 'cooling',
+         'Heating': '',
          'disable': '',
          'enable' : 'enable',
-         'Light'  : []
+         'Light'  : ''
       },
       'contexts'        : [],
       'metadata'        : {
-         'intentId'                 : 'ca56d734-1267-4fca-a3ee-d60c2ddd38cb',
+         'intentId'                 : 'dd93d74a-c24d-4bbc-91ff-7d6f54ab41ce',
          'webhookUsed'              : 'true',
          'webhookForSlotFillingUsed': 'false',
-         'intentName'               : 'Lights'
+         'intentName'               : 'General Intents'
       },
       'fulfillment'     : {
-         'speech'  : 'Action on lights accepted',
+         'speech'  : 'Ok, no problem',
          'messages': [ {
             'type'  : 0,
-            'speech': 'Action on lights accepted'
+            'speech': 'Ok, no problem'
          } ]
       },
       'score'           : 1
    },
    'status'   : { 'code': 200, 'errorType': 'success' },
-   'sessionId': 'eb30c4c2-76ae-48bf-a1c4-be2eb51c05ba'
+   'sessionId': 'fantom-console-session'
 };

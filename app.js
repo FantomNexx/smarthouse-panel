@@ -310,6 +310,8 @@ function ProcessActionGeneral( request, response ){
       }//if
    }//if
    
+   console.log( JSON.stringify( data ) );
+   
    
    var msg = 'Ok, I will do what you asked for';
    
