@@ -373,7 +373,9 @@ function ProcessActionGeneral( data ){
       if( data.new_state === 'disable' ){
          DisableLights();
          return;
-      }//if
+      }else if( data.new_state === 'enable' ){
+         EnableLights();
+      }
       
    }else if( data.action_name === 'Heating' ){
       

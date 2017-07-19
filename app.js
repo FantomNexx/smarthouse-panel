@@ -299,7 +299,9 @@ function ProcessActionGeneral( request, response ){
    if( request.parameters['number'] !== ''){
       data.new_value = request.parameters['number'];
    }//if
-   if( request.parameters['temperature'] !== ''){
+   
+   if( request.parameters['temperature'] !== '' &&
+      request.parameters['temperature']!== undefined){
       data.new_value = request.parameters['temperature'];
    }//if
    
@@ -310,6 +312,7 @@ function ProcessActionGeneral( request, response ){
       }//if
    }//if
    
+   console.log( '\n' );
    console.log( JSON.stringify( data ) );
    
    
