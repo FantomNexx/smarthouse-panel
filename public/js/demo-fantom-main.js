@@ -368,7 +368,7 @@ function ProcessResponse( response ){
 //----------------------------------------------------------
 function ProcessActionGeneral( data ){
    
-   if( data.action_name === 'Light' ){
+   if( data.action_name === 'Light' || data.action_name === 'lights_actions' ){
       
       if( data.new_state === 'disable' ){
          DisableLights();
