@@ -47,6 +47,7 @@
    var LOG_TAG = '[app.js]:';
    
    var FILE_TYPE_REGEXP = {
+      CSS : /.png/,
       CSS : /.css$/,
       JS  : /.js$/,
       HTML: /.html$/
@@ -78,7 +79,7 @@ function GetRequestHandlers(){
    var request_handlers = {};
    
    request_handlers[ '/update' ] = Update;
-   request_handlers[ '/api' ] = Save;
+   request_handlers[ '/api' ] = Api;
    
    return request_handlers;
 }//GetRequestHandlers
@@ -118,7 +119,7 @@ function ProcessWebpageFiles( request, response ){
    var file_encoding = 'UTF-8';
    
    if( request.url === '/' ){
-      file_path = './public/demo.html';
+      file_path = './public/demo-fantom.html';
       fs.readFile( file_path, file_encoding, function( error, data ){
          OnFileRead( error, data, CONTENT_TYPES.HTML, response );
       } );
@@ -228,6 +229,15 @@ function Save( request_params ){
    }//if
    
    server_data.push( value );
+   
+   //request_params.response_data = value;
+   request_params.callback_on_result( GetJSON( request_params ) );
+   
+}//Save
+//----------------------------------------------------------
+function Api( request_params ){
+   
+   console.log( JSON.stringify( request_params.request_data ) );
    
    //request_params.response_data = value;
    request_params.callback_on_result( GetJSON( request_params ) );

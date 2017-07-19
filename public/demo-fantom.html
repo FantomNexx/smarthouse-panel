@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    
+    <meta name="viewport"
+          content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+    
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet"
+          href="./css/styles-fantom-demo.css">
+    
+    <title>Demo Fantom</title>
+</head>
+<body>
+
+
+<div id="id-container-main">
+    
+    <div id="id-title">CONSOLE</div>
+    
+    <div id="id-container-center">
+        
+        <div id="id-container-input">
+            <div id="id-input-voice">
+                <img src="img/icon-mic.png" width="16"
+                     height="16"/></div>
+            <input id="id-input"
+                   placeholder="Enter or Say a command">
+            <span id="id-status"
+                  class="text-line value-secondary"></span>
+        </div>
+        
+        <div class="block" id="id-block-lights">
+            <span class="text-line text-title">LIGHTS</span>
+            <span id="id-block-lights-state"
+                  class="text-line value-secondary pos-bot-left">OFF</span>
+        </div>
+        
+        <div class="block" id="id-block-cooling">
+            <span class="text-line text-title">COOLING</span>
+            <span id="id-block-cooling-state"
+                  class="text-line value-secondary pos-bot-left">ON</span>
+            <span id="id-block-cooling-value"
+                  class="text-line value-secondary pos-bot-right">20&deg;</span>
+        </div>
+        
+        <div class="block" id="id-block-heating">
+            <span class="text-line text-title">HEATING</span>
+            <span id="id-block-heating-state"
+                  class="text-line value-secondary pos-bot-left">OFF</span>
+            <span id="id-block-heating-value"
+                  class="text-line value-secondary pos-bot-right">-</span>
+        </div>
+    
+    </div>
+    
+    <div id="id-container-bottom">
+        <div id="id-container-logs" class="log-lines"></div>
+    </div>
+
+</div><!--<div id="id-container-main">-->
+
+
+
+<script src="./js/demo-fantom-main.js"></script>
+
+</body>
+</html>
