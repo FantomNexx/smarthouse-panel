@@ -299,6 +299,9 @@ function ProcessActionGeneral( request, response ){
    if( request.parameters['number'] !== ''){
       data.new_value = request.parameters['number'];
    }//if
+   if( request.parameters['temperature'] !== ''){
+      data.new_value = request.parameters['temperature'];
+   }//if
    
    
    if(data.new_state === '' || data.new_state === undefined){
