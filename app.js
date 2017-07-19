@@ -240,12 +240,68 @@ function Api( request_params ){
    console.log( JSON.stringify( request_params.request_data ) );
    
    //request_params.response_data = value;
-   request_params.callback_on_result( GetJSON( request_params ) );
+   request_params.callback_on_result(
+      GetResponse( request_params ) );
    
-}//Save
+}//Api
 //----------------------------------------------------------
 
-function GetJSON( request_params ){
+
+//----------------------------------------------------------
+function GetResponse( request_params ){
+   
+   var request = request_params.request_data.result;
+   
+   var response = {
+      'speech'     : '',
+      'displayText': '',
+      'data'       : {},
+      'contextOut' : [],
+      'source'     : 'Fantom Server'
+   };//response
+   
+   switch( request.action ){
+      case 'lights_actions':
+         response = ProcessActionLights( request, response );
+         break;
+   }//switch
+   
+   request_params.response_data = response;
+   
+   return request_params;
+}//GetJSON
+//----------------------------------------------------------
+function ProcessActionLights( request, response ){
+   
+   var data = {};
+   data.action_name = request.action;
+   data.new_state = undefined;
+   
+   var msg ='';
+   
+   if( request.parameters.disable === 'disable' ){
+      data.new_state = 'disable';
+      msg = 'Ok, I will turn lights off';
+      
+   }else if( request.parameters.enable === 'enable' ){
+      data.new_state = 'enable';
+      msg = 'Ok, I will turn lights on';
+      
+   }else{
+      msg = 'Ok, I do not know what to do with lights';
+   }//else
+   
+   response.speech = msg;
+   response.displayText = msg;
+   response.data = data;
+   
+   return response;
+}//ProcessActionLights
+//----------------------------------------------------------
+
+
+//----------------------------------------------------------
+function GetJSON2( request_params ){
    
    request_params.response_data =
       {
@@ -258,5 +314,4 @@ function GetJSON( request_params ){
    
    return request_params;
 }//GetJSON
-
 //----------------------------------------------------------

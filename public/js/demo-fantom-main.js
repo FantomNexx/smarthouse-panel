@@ -138,7 +138,7 @@ function InitInputVoice(){
       if( el_input_voice === undefined ){
          return;
       }//if
-   
+      
       StartRecognition();
    };//OnInputVoiceClick
    
@@ -335,7 +335,23 @@ function ProcessResponse( response ){
    
    SendToLog( msg );
    
+   var data = response.result.data;
+   
+   switch( data.action_name ){
+      case 'lights_actions':
+         ProcessActionLights( data );
+         break;
+   }//switch
+   
 }//ProcessResponse
+//----------------------------------------------------------
+function ProcessActionLights( data ){
+   if( data.new_state === 'disable' ){
+      EnableLights();
+   }else if( data.new_state === 'enable' ){
+      DisableLights();
+   }//elseif
+}//ProcessActionLights
 //----------------------------------------------------------
 
 
@@ -401,3 +417,38 @@ function GetDate(){
    return ('[' + new Date().toISOString().slice( 11, -5 ) + ']');
 }//GetDate
 //----------------------------------------------------------
+
+var a = {
+   'id'       : '55fea1a0-3f1c-4e64-9e60-6f5801beef6d',
+   'timestamp': '2017-07-19T14:15:29.898Z',
+   'lang'     : 'en',
+   'result'   : {
+      'source'          : 'agent',
+      'resolvedQuery'   : 'enable lights',
+      'speech'          : '',
+      'action'          : 'lights_actions',
+      'actionIncomplete': false,
+      'parameters'      : {
+         'disable': '',
+         'enable' : 'enable',
+         'Light'  : []
+      },
+      'contexts'        : [],
+      'metadata'        : {
+         'intentId'                 : 'ca56d734-1267-4fca-a3ee-d60c2ddd38cb',
+         'webhookUsed'              : 'true',
+         'webhookForSlotFillingUsed': 'false',
+         'intentName'               : 'Lights'
+      },
+      'fulfillment'     : {
+         'speech'  : 'Action on lights accepted',
+         'messages': [ {
+            'type'  : 0,
+            'speech': 'Action on lights accepted'
+         } ]
+      },
+      'score'           : 1
+   },
+   'status'   : { 'code': 200, 'errorType': 'success' },
+   'sessionId': 'eb30c4c2-76ae-48bf-a1c4-be2eb51c05ba'
+};
