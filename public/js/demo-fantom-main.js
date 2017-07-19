@@ -325,17 +325,30 @@ function CommandSend( cmd ){
 function ProcessResponse( response ){
    
    var msg = ' [Server response]: ';
+   msg += response.result.fulfillment.speech;
    
-   if( response.result.speech ){
-      msg += response.result.speech;
-      SendToLog( msg );
-   }else{
-      msg += response.result.fulfillment.speech;
-   }//else
+   /*
+    if( response.result.speech ){
+    msg += response.result.speech;
+    SendToLog( msg );
+    }else{
+    msg += response.result.fulfillment.speech;
+    }//else
+    */
    
    SendToLog( msg );
    
-   var data = response.result.data;
+   SetStatus( response.result.fulfillment.speech );
+   setTimeout( function(){
+      SetStatus( status_lines.standing_by );
+   }, 3000 );
+   
+   
+   var data = response.result.fulfillment.data;
+   
+   if(data === undefined){
+      return;
+   }//if
    
    switch( data.action_name ){
       case 'lights_actions':
@@ -347,9 +360,9 @@ function ProcessResponse( response ){
 //----------------------------------------------------------
 function ProcessActionLights( data ){
    if( data.new_state === 'disable' ){
-      EnableLights();
-   }else if( data.new_state === 'enable' ){
       DisableLights();
+   }else if( data.new_state === 'enable' ){
+      EnableLights();
    }//elseif
 }//ProcessActionLights
 //----------------------------------------------------------
@@ -360,6 +373,7 @@ function SendToLog( msg ){
    var line = GetDate() + msg;
    console.log( line );
    el_container_logs.innerHTML += line + '<br />';
+   
 }//SendToLog
 //----------------------------------------------------------
 

@@ -47,7 +47,7 @@
    var LOG_TAG = '[app.js]:';
    
    var FILE_TYPE_REGEXP = {
-      CSS : /.png/,
+      PNG : /.png$/,
       CSS : /.css$/,
       JS  : /.js$/,
       HTML: /.html$/
