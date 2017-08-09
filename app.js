@@ -120,7 +120,7 @@ function ProcessWebpageFiles( request, response ){
    var file_encoding = 'UTF-8';
    
    if( request.url === '/' ){
-      file_path = './public/demo-fantom.html';
+      file_path = './public/panel.html';
       fs.readFile( file_path, file_encoding, function( error, data ){
          OnFileRead( error, data, CONTENT_TYPES.HTML, response );
       } );
@@ -351,21 +351,4 @@ function ProcessActionLights( request, response ){
    
    return response;
 }//ProcessActionLights
-//----------------------------------------------------------
-
-
-//----------------------------------------------------------
-function GetJSON2( request_params ){
-   
-   request_params.response_data =
-      {
-         'speech'     : 'speech msg',
-         'displayText': 'displayText msg',
-         'data'       : { 'face': { 'facebook_msg': 'the msg' } },
-         'contextOut' : [],
-         'source'     : 'DuckDuckGo'
-      };
-   
-   return request_params;
-}//GetJSON
 //----------------------------------------------------------
