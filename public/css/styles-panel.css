@@ -33,6 +33,8 @@ body{
     width         : 50%;
     height        : 50%;
     font-size     : 0;
+    overflow      : hidden;
+    min-width     : 320px;
 }
 
 .block{
@@ -151,9 +153,9 @@ body{
 }
 
 .log-lines{
-    position   : absolute;
-    bottom     : 16px;
-    left       : 16px;
-    overflow   : hidden;
-    line-height: 18px;
+    position    : absolute;
+    bottom      : 16px;
+    left        : 16px;
+    overflow    : hidden;
+    line-height : 18px;
 }
